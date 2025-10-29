@@ -1,0 +1,37 @@
+name: Publish
+
+on:
+  push:
+    branches:
+        - main
+
+# Need for OIDC
+permissions:
+  id-token: write
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+        # Clone the code 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+        # Install terraform
+      - name: Setup Terraform 
+        uses: hashicorp/setup-terrraform@v4
+        with: # inputs 
+            terraform_version: 1.13.4  
+      - name: Terraform init
+        run: terraform init
+      - name: Terraform Plan
+        run: terraform plan 
+      - name: Terraform Apply
+        run: terraform apply --auto-approve
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v5.1.0
+        with:
+            aws-region: us-east-1
+            role-to-assume: ${{secrets.AWS_ROLE_ASSUME}}
+            role-session-name: Fronted-deploymnet 
