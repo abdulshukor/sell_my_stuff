@@ -69,5 +69,5 @@ jobs:
         role-session-name: Fronted-deploymnet 
      - name: Deploy App
        run: |
-         aws s3 sync dist s3://sell-my-staff-abdul --delete
+         aws s3 sync dist s3://sell-my-stuff-frontend-abdul --delete
          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID}} --paths "/*"
