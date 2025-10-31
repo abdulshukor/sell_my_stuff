@@ -28,7 +28,7 @@ data "aws_iam_policy_document" "origin_bucket_policy" {
   }
 }
 
-# Link the policy you create(Origin Policy) wiht buket. To make connectoin between these two
+# Link the policy you create(Origin Policy) wiht bucket policy. To make connectoin between these two
 resource "aws_s3_bucket_policy" "abdul_hosting" {
   bucket = aws_s3_bucket.abdul_hosting.bucket
   policy = data.aws_iam_policy_document.origin_bucket_policy.json
