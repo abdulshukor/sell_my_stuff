@@ -68,6 +68,6 @@ jobs:
         role-to-assume: ${{secrets.AWS_ROLE_ASSUME}}
         role-session-name: Fronted-deploymnet 
      - name: Deploy App
-       run: | # with Pipe we use multiple lines - Pinning version .terraform-version. Exactly the same.  --paths "/*" cleaning everything
-         aws s3 sync dist s3://sell-my-stuff-frontend-abdul --delete # Delete anything in s3 bucket and not in dist 
+       run: | # with Pipe we use multiple lines - Pinning version .terraform-version. Exactly the same.  --paths "/*" cleaning everything. # Delete anything in s3 bucket and not in dist 
+         aws s3 sync dist s3://sell-my-stuff-frontend-abdul --delete 
          aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID}} --paths "/*" 
